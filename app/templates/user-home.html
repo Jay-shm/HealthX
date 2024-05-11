@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <title>User Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user-home.css') }}">
+</head>
+<body>
+    <div class="first-container">
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="HealthX">
+        <div class="menu-item"><a href="{{ url_for('routes.patient_dashboard') }}" class="link">Home</a><span class="dot"></span></div>
+        <div class="menu-item"><a href="{{ url_for('routes.disprep') }}" class="link">Report</a></div>
+        <div class="menu-item"><a href="{{ url_for('routes.accreport') }}" class="link">Log-Out</a></div>
+    </div>
+    <div class="first-vertile">
+        <div class="circle-img"></div>
+        <div class="side-text">
+            <span>Hello, <b id="username">{{ username }}</b></span>
+        </div>
+        <div class="content">
+            <h2>Welcome, <span id="username_span">{{ username }}</span>!</h2>
+            <h3>Recent Appointments:</h3>
+            <ul id="appointment_list">
+                <!-- Appointments will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    <div class="sec-vertile">
+        <div class="center-box">
+            <br><b>History:</b></br>
+            <ul id="report_dates">
+                <!-- Report dates will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Function to get recent appointments from Flask
+        function getAppointments() {
+            fetch('/get_appoint')
+                .then(response => response.json())
+                .then(data => {
+                    const appointmentList = document.getElementById('appointment_list');
+                    appointmentList.innerHTML = '';
+                    const appointmentItem = document.createElement('li');
+                    appointmentItem.textContent = data.appointment;
+                    appointmentList.appendChild(appointmentItem);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // Function to get report dates from Flask
+        function getReportDates() {
+            fetch('/get_report_dates')
+                .then(response => response.json())
+                .then(data => {
+                    const reportDatesList = document.getElementById('report_dates');
+                    reportDatesList.innerHTML = '';
+                    data.report_dates.forEach(date => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = date;
+                        reportDatesList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    
+        // Call function to get recent appointments and report dates
+        getAppointments();
+        getReportDates();
+    </script>
+    
+</body>
+</html>

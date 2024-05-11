@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <title>doctor access</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/doctor-home.css') }}">
+</head>
+<body>
+    <div class="first-container">
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="Your Image">
+        <div class="menu-container">
+            <div class="menu-item"><a href="{{ url_for('routes.doctor_dashboard') }}"> Home</a></div>
+            <div class="menu-item"><a href="{{ url_for('routes.access_user') }}"> Access</a><span class="dot"></span></div>
+            <div class="menu-item"><a href="{{ url_for('routes.accreport') }}"> History</a></div>
+        </div>
+        <div class="additional-text" id="welcomeText">Welcome, Dr <span id="usernamePlaceholder"></span></div>
+    </div>
+    <div class="uids">
+         Enter Unique User ID:    <input type="text" id="user_id">
+         <br><br>
+         <br><br>Enter all the symptoms noted:  <input type="text" id="symptoms">
+    </div>
+    <br>
+    <div class="uids">
+         Enter all the prescribed drugs:  <input type="text" id="prescription">
+    </div>
+    <br><br>
+    <br><br>
+    <div class="button-container">
+        <button onclick="uploadData()">Upload</button>
+    </div>
+
+    <script>
+        // Function to fetch username from the server
+        fetch('/get_username')
+            .then(response => response.json())
+            .then(data => {
+                const usernamePlaceholder = document.getElementById('usernamePlaceholder');
+                if (data.username) {
+                    usernamePlaceholder.textContent = data.username;
+                }
+            })
+            .catch(error => console.error('Error fetching username:', error));
+
+        function uploadData() {
+            const userId = document.getElementById('user_id').value;
+            const symptoms = document.getElementById('symptoms').value;
+            const prescription = document.getElementById('prescription').value;
+
+            // Example: Send data to the server using fetch or other methods
+            fetch('/upload_data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    symptoms: symptoms,
+                    prescription: prescription,
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to upload data');
+                }
+            })
+            .then(data => {
+                // Handle success response from the server
+                console.log(data);
+                alert('Data uploaded successfully!');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error:', error);
+                alert('Error: ' + error.message); // Display the error message from the server
+            });
+        }
+    </script>
+</body>
+</html>

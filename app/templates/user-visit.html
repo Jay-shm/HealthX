@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <title>User Visit</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/user-visit.css')}}">
+</head>
+<body>
+    <div class="first-container">
+        <div class="circle-img"></div>
+        <div class="side-text">
+            <a href="user-account.html" class="link"><span>Hello, <span id="username_span">{{ username }}</span></span></a>
+        </div>
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="Your Image">
+        <div class="menu-item"><a href="{{ url_for('routes.patient_dashboard') }}" class="link">Home</a>></div>
+        <div class="menu-item"><a href="{{ url_for('routes.disprep') }}" class="link">Report</a><span class="dot"></span></div>
+        <div class="menu-item"><a href="{{ url_for('routes.accreport') }}" class="link">Log-Out</a></div>
+    </div>
+    <div class="outer-box">
+        <div class="inner-box">
+            <!-- Report display -->
+            {% for report in reports %}
+            <div class="top-left">Visited Dr. XYZ {{ report.date }}</div>
+            <hr class="hr-top">
+            <div class="table">
+                <div class="table-row header">
+                    <div class="table-cell"><u>Symptoms</u></div>
+                    <div class="table-cell"><u>Prescription</u></div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">{{ report.symptoms }}</div>
+                    <div class="table-cell">{{ report.prescription }}</div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="doctor-id">Unique Doctor ID: {{ report.doctor_id }}</div>
+            <br><hr class="hr-middle">
+            {% endfor %}
+            <!-- Search section -->
+            <label for="reportId">Enter Report ID:</label>
+            <input type="text" id="reportId" placeholder="Enter Report ID">
+            <button onclick="accessReport()">Access Report</button>
+
+            <!-- Display all reports -->
+            <h2>All Reports</h2>
+            <ul id="allReports"></ul>
+        </div>
+    </div>
+    <script>
+        // Function to access a particular report by its ID
+        function accessReport() {
+            const reportId = document.getElementById('reportId').value;
+
+            // Validate if the report ID is provided
+            if (!reportId) {
+                alert('Please enter a Report ID.');
+                return;
+            }
+
+            // Fetch report details from the server
+            fetch(`/get_report2?report_id=${reportId}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch report details');
+                    }
+                })
+                .then(data => {
+                    // Display the retrieved report details
+                    if (data.report) {
+                        // Modify this part to display the report details as needed
+                        alert(`Report ID: ${data.report.id}\nSymptoms: ${data.report.symptoms}\nPrescription: ${data.report.prescription}\nDate Uploaded: ${data.report.date_uploaded}`);
+                    } else {
+                        alert('Report not found.');
+                    }
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                    alert('Error: ' + error.message); // Display the error message from the server
+                });
+        }
+
+        // Function to display all reports of the current user
+        function displayAllReports() {
+            fetch('/get_all_reports') // Assuming this endpoint returns all reports of the current user
+                .then(response => response.json())
+                .then(data => {
+                    const allReportsList = document.getElementById('allReports');
+                    allReportsList.innerHTML = ''; // Clear previous list items
+                    data.reports.forEach(report => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Report ID: ${report.id}, Symptoms: ${report.symptoms}, Prescription: ${report.prescription}, Date Uploaded: ${report.date_uploaded}`;
+                        allReportsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to fetch all reports.');
+                });
+        }
+
+        // Call the function to display all reports when the page loads
+        window.onload = displayAllReports;
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{url_for('static',filename = 'img/HealthX.png')}}">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'css/sign-up.css')}}">
+    <script src="https://kit.fontawesome.com/1a96132f93.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sign-up-form">
+            <div class="logo-container">
+                <img src="{{url_for('static',filename = 'img/HealthX.png')}}" alt="Healthx Logo" class="logo">
+                <p>Sign-Up With Your Account</p>
+            </div>
+        </div>
+        <form  action="#">
+            <div class="input-container">
+                <input type="text" id="username" name="Username" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Full Name';}">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-container">
+                <input type="email" id="email" name="email" placeholder="Email Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email Address';}">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-container">
+                <input type="password" id="pwd" name="pwd" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="input-container">
+                <input type="password" id="cpwd" name="cpwd" placeholder="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </form>
+        <br><button id="sign-up">Submit</button></br>
+        <div class="account">Already Have an Account? <a href="{{ url_for('routes.login_page') }}">Sign-in</a></div>
+    </div>
+    <script>
+        document.getElementById("sign-up").addEventListener("click", function(event) {
+            event.preventDefault();
+            const formData = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("pwd").value,
+                confirm_password: document.getElementById("cpwd").value
+            };
+            fetch("/signup", {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                if(response.ok){
+                    window.location.href = "http://127.0.0.1:5000/";
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data && data.error) {
+                    alert(data.error);
+                }
+            })
+            .catch(error =>{
+                console.error("Error:", error);
+                alert("An error occurred. Please try again later");
+            });
+        });
+    </script>
+    
+</body>
+</html>

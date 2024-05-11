@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.first-container {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    background-color: #ffffff;
+    height: 90px;
+    width: 100%;
+    padding: 0 20px;
+    position: relative;
+}
+
+.circle-img {
+    position: absolute;
+    top: 20px; 
+    right: 50px; 
+    width: 60px; 
+    height: 60px; 
+    background-color: #ccc;
+    background-image: url('C:\\Users\\HP\\Desktop\\wilbur\\images\\Jaybro.jpg'); 
+    background-size: cover; 
+    border-radius: 50%;
+}
+
+.side-text {
+    position: absolute;
+    top: 20px; 
+    right: 118px;
+    font-size: 20px; 
+    line-height: 60px; 
+}
+
+.side-text span {
+    text-decoration: underline; 
+    border-bottom: 2px solid none; 
+    padding-bottom: 4px; 
+}
+
+.side-text span:hover {
+    border-bottom-color: black; 
+}
+
+.first-container img {
+    height: 100%;
+    margin-right: 20px;
+    margin-left: 0;
+    display: block;
+}
+
+.menu-item {
+    color: #000000;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 2px; 
+    padding: 0 10px; 
+    position: relative; 
+}
+
+.dot {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+
+.link {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.outer-box {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    background-color: #E2FCD6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-box {
+    width: 100%;
+    max-width: 1183px;
+    height: 400px;
+    background: #14967F;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    color: white;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.top-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.hr-top {
+    border: none;
+    border-top: 2px solid white;
+    width: calc(100% - 20px);
+    margin-top: 30px; 
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.table {
+    margin: 0 auto; 
+    width: 100%; 
+    border-collapse: collapse; 
+    display: table; 
+}
+
+.table-row {
+    display: table-row; 
+}
+
+.table-cell {
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    color: white;
+    display: table-cell; 
+}
+
+.table-cell u {
+    border-bottom: 2px solid;
+    padding: 2px;
+    text-decoration: none;
+}
+
+.table-cell:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: -10px; 
+    bottom: -148px; 
+    left: -1px; 
+    width: 2px; 
+    background-color: white;
+}
+
+.header {
+    font-weight: bold;
+    background-color: #14967F; 
+}
+
+.doctor-id {
+    color: white;
+    font-size: 12px;
+    margin-bottom: 100px;
+    margin-left: 1060px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.hr-middle {
+    border: none;
+    border-top: 1px solid white;
+    width: calc(100% - 20px);
+    margin-top: 3px; 
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0;
+    clear: both; 
+}
+
+.top-right {
+    color: white;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 10px;
+    float: right;
+}
+
+

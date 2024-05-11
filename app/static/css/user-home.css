@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.first-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    height: 90px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.first-container img {
+    height: 100%;
+    margin-right: 20px;
+    margin-left: 0;
+    display: block;
+}
+
+.menu-item {
+    color: #000000;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 2px; 
+    padding: 0 10px; 
+    position: relative; 
+}
+
+.dot {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.link {
+    text-decoration: none; 
+    color: black;
+}
+
+.first-vertile {
+    background-color: #E2FCD6;
+    height: 690px;
+    width: 990px;
+    float: left;
+    position: relative;
+}
+
+
+.circle-img {
+    position: absolute;
+    top: 110px; 
+    left: 80px; 
+    width: 100px;
+    height: 100px;
+    background-color: #ccc; 
+    background-image: url('C:\\Users\\HP\\Desktop\\wilbur\\images\\Jaybro.jpg'); 
+    background-size: cover; 
+    border-radius: 50%;
+}
+
+.side-text {
+    position: absolute;
+    top: 110px; 
+    left: 200px; 
+    font-size: 20px; 
+    line-height: 100px; 
+}
+
+.side-text span {
+    text-decoration: underline; 
+}
+
+.side-text span:hover {
+    border-bottom-color: black;
+}
+
+.additional-text {
+    position: absolute;
+    top: 220px; 
+    left: 80px; 
+    font-size: 16px; 
+    color: #333; 
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+.sec-vertile {
+    background-color: #14967F;
+    height: 100vh;
+    width: calc(100% - 990px);
+    float: left;
+    border-radius: 13px;
+}
+
+.center-box {
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-left: 70px;
+    padding: 10px;
+    background-color: transparent;
+    width: 200px;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.center-box b {
+    font-size: 20px;
+    font-weight: bold;
+}

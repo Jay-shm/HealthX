@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/log-in.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <div class="sign-up-form">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='img/Healthx.png') }}" alt="Healthx Logo" class="logo">
+                <p>Sign-In With Your Account</p>
+            </div>
+        </div>
+        <form id="login-form">
+            <div class="input-container">
+                <input type="text" id="username" name="username" placeholder="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2>Choose from the below:</h2>
+            <div class="checkbox-wrapper-4">
+                <select name="user_type" id="user_type">
+                    <option value="user">Patient</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <br><br>
+            <button type="submit" id="log-in">Submit</button>
+            <div class="account">Don't Have an Account? <a href="{{ url_for('routes.signup_form') }}">Register</a></div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                user_type: document.getElementById("user_type").value
+            };
+        
+            fetch("/login", {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => {
+                if(response.ok) {
+                    return response.json();
+                } else {
+                    return response.json().then(data => { throw new Error(data.error); });
+                }
+            })
+            .then(data => {
+                console.log(data);
+                if (data.redirect_url) {
+                    window.location.href = data.redirect_url; // Redirect to dashboard
+                } else {
+                    alert("Redirect URL not provided");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert(error.message);
+            });
+        });        
+    </script>
+</body>
+</html>

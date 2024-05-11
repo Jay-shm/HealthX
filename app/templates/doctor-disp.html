@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <title>Doctor Access</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/doctor-home.css') }}">
+</head>
+<body>
+    <div class="first-container">
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="Your Image">
+        <div class="menu-container">
+            <div class="menu-item"><a href="{{ url_for('routes.doctor_dashboard') }}"> Home</a></div>
+            <div class="menu-item"><a href="{{ url_for('routes.access_user') }}"> Access</a></div>
+            <div class="menu-item"><a href="{{ url_for('routes.accreport') }}"> History</a><span class="dot"></span></div>
+        </div>
+        <div class="additional-text" id="welcomeText">Welcome, Dr <span id="usernamePlaceholder"></span></div>
+    </div>
+    <div class="uids">
+         Enter Unique User ID:    <input type="text" id="userId">
+         <br><br>
+         <button onclick="fetchReports()">Fetch Reports</button>
+    </div>
+    <br>
+    <div id="reportContainer" style="display: none;">
+        <h2>Reports for User ID: <span id="userIdDisplay"></span></h2>
+        <ul id="reportList"></ul>
+        <br>
+        Enter Report ID: <input type="text" id="reportId">
+        <button onclick="accessReport()">Access Report</button>
+    </div>
+
+    <script>
+        // Function to fetch username from the server
+        fetch('/get_username')
+            .then(response => response.json())
+            .then(data => {
+                const usernamePlaceholder = document.getElementById('usernamePlaceholder');
+                if (data.username) {
+                    usernamePlaceholder.textContent = data.username;
+                }
+            })
+            .catch(error => console.error('Error fetching username:', error));
+
+        function fetchReports() {
+            const userId = document.getElementById('userId').value;
+            const userIdDisplay = document.getElementById('userIdDisplay');
+            userIdDisplay.textContent = userId;
+            document.getElementById('reportContainer').style.display = 'block';
+
+            fetch(`/get_reports?user_id=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const reportList = document.getElementById('reportList');
+                    reportList.innerHTML = '';
+                    data.reports.forEach(report => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Report ID: ${report.id}, Symptoms: ${report.symptoms}, Prescription: ${report.prescription}`;
+                        reportList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching reports:', error));
+        }
+
+        function accessReport() {
+            const reportId = document.getElementById('reportId').value;
+        
+            // Validate if the report ID is provided
+            if (!reportId) {
+                alert('Please enter a Report ID.');
+                return;
+            }
+        
+            // Fetch report details from the server
+            fetch(`/get_report?report_id=${reportId}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch report details');
+                    }
+                })
+                .then(data => {
+                    // Display the retrieved report details
+                    if (data.report) {
+                        alert(`Report ID: ${data.report.id}\nSymptoms: ${data.report.symptoms}\nPrescription: ${data.report.prescription}\nDate Uploaded: ${data.report.date_uploaded}`);
+                    } else {
+                        alert('Report not found.');
+                    }
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('Error:', error);
+                    alert('Error: ' + error.message); // Display the error message from the server
+                });
+        }        
+    </script>
+</body>
+</html>

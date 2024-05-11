@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #CCECEE;
+}
+
+.first-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    height: 90px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.first-container img {
+    height: 100%;
+    display: block;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.menu-item {
+    color: #000000;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 2px;
+    padding: 0 10px;
+    position: relative;
+}
+
+.dot {
+    position: absolute;
+    bottom: -16px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.additional-text {
+    color: #000000;
+    font-weight: bold;
+    padding: 0 200px;
+    text-decoration: 2px underline;
+}
+
+.center-top {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.center-top h1 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.center-top button {
+   margin-top: 20px;
+    padding: 10px 20px; 
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #14796F;
+    color: white;
+    cursor: pointer;
+}
+
+.center-top button a {
+    text-decoration: none;
+    color: white;
+}
+
+hr {
+    position: absolute;
+    top: 380px;
+    left: 0;
+    width: 100%;
+    border: none;
+    border-top: 1px solid black;
+    box-sizing: border-box; 
+}
+
+
+.center-bottom {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.center-bottom h1 {
+    font-size: 28px;
+}
+
+.center-bottom button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #14796F;
+    color: white;
+    cursor: pointer;
+}
+
+.center-bottom button a {
+    text-decoration: none;
+    color: white;
+}

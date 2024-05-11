@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="icon" href="{{ url_for('static', filename='img/HealthX.png') }}">
+    <title>doctor home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/doctor-home.css') }}">
+</head>
+<body>
+    <div class="first-container">
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="HealthX">
+        <div class="menu-container">
+            <div class="menu-item"><a href="{{ url_for('routes.doctor_dashboard') }}"> Home</a><span class="dot"></span></div>
+            <div class="menu-item"><a href="{{ url_for('routes.access_user') }}"> Access</a></div>
+            <div class="menu-item"><a href="{{ url_for('routes.accreport') }}"> History</a></div>
+        </div>
+        <div class="additional-text">Welcome, Dr <span id="usernamePlaceholder"></span></div>
+    </div>
+    <div class="center-top">
+    <h1>Upload patient reports</h1>
+    <button><a href="{{ url_for('routes.access_user') }}">Upload</a></button>
+    </div>
+    <hr>
+    <div class="center-bottom">
+        <h1>Access patient reports</h1>
+        <button><a href="{{ url_for('routes.accreport') }}"> History</a></button>
+    </div>
+
+    <script>
+        fetch('/get_username')
+            .then(response => response.json())
+            .then(data => {
+                const usernamePlaceholder = document.getElementById('usernamePlaceholder');
+                if (data.username) {
+                    usernamePlaceholder.textContent = data.username;
+                }
+            })
+            .catch(error => console.error('Error fetching username:', error));
+    </script>
+</body>
+</html>

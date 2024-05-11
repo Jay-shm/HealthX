@@ -1,0 +1,127 @@
+body {
+  background-color: #3C8BAA;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  display: flex; 
+}
+
+.container {
+  background-color: #ffffff;
+  height: 550px;
+  width: 410px;
+  max-width: 500px; 
+  border-radius: 35px;
+  margin: auto; 
+  padding: 20px;
+  box-shadow: 10px 7px; 
+  color: #96CDE2;
+}
+
+.sign-up-form {
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  max-width: 200px; 
+  margin-bottom: 10px; 
+}
+
+.sign-up-form p {
+  color: #000000e7;
+  font-weight: bold;
+  font-size: 14px; 
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; 
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+
+.input-container input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #ffffff;
+  padding: 12px 20px;
+  border-radius: 20px;
+  background: #e4e4e4;
+}
+
+.input-container i {
+  position: absolute;
+  right: -20px; 
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000000; 
+}
+
+.fa-user:before {
+  content: '\f007'; 
+  font-family: 'Font Awesome 5 Free';
+}
+
+.fa-envelope:before {
+  content: '\f0e0'; 
+  font-family: 'Font Awesome 5 Free';
+}
+
+.fa-lock:before {
+  content: '\f023'; 
+  font-family: 'Font Awesome 5 Free';
+}
+
+button {
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #2ba8fb;
+  color: #ffffff;
+  font-weight: bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  display: block; 
+  margin: 0 auto; 
+  width: 115px; 
+  height: 50px; 
+}
+
+button:hover {
+  background-color: #6fc5ff;
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}
+
+button:active {
+  background-color: #3d94cf;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+.account {
+  color: #000000;
+  text-align: center;
+  margin-top: 20px; 
+}
+
+.account a {
+  font-weight: bold;
+  color: #000000;
+}

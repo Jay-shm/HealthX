@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Not Found</title>
+    <!-- Add CSS files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+    <!-- Add other meta tags and stylesheets if needed -->
+</head>
+<body>
+    <div class="not-found-container">
+        <img src="{{ url_for('static', filename='img/HealthX.png') }}" alt="Your Image" class="logo">
+        <br>
+        <h3>OOPS! PAGE NOT FOUND</h3>
+        <div class="not-found-container1">
+            <h1 class="not-found-text1">404</h1>
+        </div>
+        <div class="not-found-container2">
+            <h2 class="not-found-text2">WE ARE SORRY, BUT THE PAGE YOU REQUESTED WAS NOT FOUND</h2>
+        </div>
+    </div>
+    <!-- Add other HTML content -->
+</body>
+</html>
